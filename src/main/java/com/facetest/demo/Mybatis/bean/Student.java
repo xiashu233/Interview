@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 
+/**
+ * 实体类 Student 对应数据库Student表
+ */
 @Data
 public class Student implements Serializable,Cloneable {
     @Id

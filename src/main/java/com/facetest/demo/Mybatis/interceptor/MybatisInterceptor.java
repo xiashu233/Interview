@@ -5,6 +5,9 @@ import org.apache.ibatis.plugin.Invocation;
 
 import java.util.Properties;
 
+/**
+ * MyBatis自定义插件拦截器
+ */
 public class MybatisInterceptor implements Interceptor {
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
