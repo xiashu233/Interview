@@ -1,7 +1,7 @@
 package com.facetest.demo.utils;
 
 /**
- * 雪花算法
+ * 雪花算法 生成分布式系统下的唯一ID
  * @author: zhonglinsen
  * @date: 2019/5/20
  */
@@ -92,14 +92,14 @@ public class SnowFlakeUtil {
         return System.currentTimeMillis();
     }
 
-    public static void main(String[] args) {
-        SnowFlakeUtil snowFlake = new SnowFlakeUtil(2, 3);
-
-        long start = System.currentTimeMillis();
-        for (int i = 0; i < 1000000; i++) {
-            System.out.println("当前生成的有序数字串："+snowFlake.nextId());
-        }
-
-        System.out.println("总共耗时："+(System.currentTimeMillis() - start));
-    }
+//    public static void main(String[] args) {
+//        SnowFlakeUtil snowFlake = new SnowFlakeUtil(2, 3);
+//
+//        long start = System.currentTimeMillis();
+//        for (int i = 0; i < 1000000; i++) {
+//            System.out.println("当前生成的有序数字串："+snowFlake.nextId());
+//        }
+//
+//        System.out.println("总共耗时："+(System.currentTimeMillis() - start));
+//    }
 }

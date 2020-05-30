@@ -1,7 +1,7 @@
 package com.facetest.demo.Java基础;
 
 /**
- * 单例模式实现方式1
+ * 单例模式实现方式 1
  */
 public class Singleton1 {
 
