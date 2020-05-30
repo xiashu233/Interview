@@ -1,4 +1,4 @@
-package com.facetest.demo.Java8;
+package com.facetest.demo.Java基础;
 
 /**
  * final 修饰的类叫做最终类 该类不可以被继承

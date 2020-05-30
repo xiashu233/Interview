@@ -1,5 +1,6 @@
 package com.facetest.demo.SpringMVC;
 
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -15,6 +16,7 @@ import java.util.Set;
 
 @RestController
 @Slf4j
+@Api
 public class testControl {
     @Autowired
     RedisTemplate redisTemplate;
