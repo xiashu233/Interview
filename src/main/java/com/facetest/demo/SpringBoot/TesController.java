@@ -16,6 +16,7 @@ public class TesController {
 
     @RequestMapping("/my")
     public String getMyInfo(){
+        System.out.println("获取到 Spring 注入的配置");
         return "configBean:" + configBean.getName() + ":" + configBean.getAge()
                 + "testConfigBean:" + testConfigBean.getName() + ":" + testConfigBean.getAge();
     }
