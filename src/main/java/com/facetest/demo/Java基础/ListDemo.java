@@ -8,6 +8,21 @@ import java.util.*;
 public class ListDemo {
 
     public static void main(String[] args) {
+        // Array 和 List 之间互相转化
+        int[] intArray = new int[10];
+        // 由于 List 不可以存放基本类型 所以int[] 无法转换成 List<int>
+        List<int[]> ints = Arrays.asList(intArray);
+        // List 转换为 Array
+        Object[] objects = ints.toArray();
+
+
+        // 可以使用基本类型的包装类 实现正确转换
+        Integer[] integerArray = new Integer[10];
+        List<Integer> integers = Arrays.asList(integerArray);
+
+
+
+
         // ArrayList 实现了 RandomAccess 接口 所以支持高效的随机访问
         List arrayList = new ArrayList();
         // linkedList 没有实现 所以不支持
