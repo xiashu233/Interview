@@ -1,6 +1,7 @@
 package com.facetest.demo.设计模式.简单工厂模式;
 
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class testMain {
 
@@ -20,5 +21,7 @@ public class testMain {
         operateBean.setNumB(numB);
         Double result = operateBean.getResult();
         System.out.println("结果是：" + result);
+
+
     }
 }
