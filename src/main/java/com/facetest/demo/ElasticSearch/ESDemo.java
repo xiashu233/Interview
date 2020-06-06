@@ -1,25 +1,17 @@
-//package com.facetest.demo;
+//package com.facetest.demo.ElasticSearch;
 //
-//import com.facetest.demo.ElasticSearch.Article;
-//import com.facetest.demo.ElasticSearch.ArticleEsRepository;
 //import org.junit.Test;
-//import org.junit.runner.RunWith;
 //import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.test.context.junit4.SpringRunner;
+//import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.RestController;
 //
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
-//class DemoApplicationTests {
-//
-//    @Test
-//    void contextLoads() {
-//    }
+//@RestController
+//public class ESDemo {
 //
 //    @Autowired
 //    private ArticleEsRepository articleEsRepository;
 //
-//    @Test
+//    @RequestMapping("testES")
 //    public void testSave() {
 //        Article article = new Article();
 //        article.setAuthor("Alice");
@@ -29,5 +21,4 @@
 //        article.setSummary("spring boot es");
 //        articleEsRepository.save(article);
 //    }
-//
 //}

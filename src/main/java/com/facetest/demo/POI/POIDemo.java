@@ -44,7 +44,7 @@ public class POIDemo {
             // 排序 按照 StuAge 升序  reversed 降序
             students.sort(Comparator.comparing(Student::getStuAge).reversed());
 
-            System.out.println(students);
+            // System.out.println(students);
 
             int size = students.size();
             HSSFRow commRow = null;
@@ -61,6 +61,7 @@ public class POIDemo {
             output = response.getOutputStream();
             // 输出到本地
             // output = new FileOutputStream("D://test.xls");
+            // 清空缓冲区 以便填充数据
             response.reset();
 
             // 设置文件头
@@ -69,6 +70,7 @@ public class POIDemo {
             response.setContentType("application/msexcel");
 
             wb.write(output);
+            // 刷新此输出流，强制写出所有缓冲的输出字节
             output.flush();
             output.close();
             wb.close();
@@ -85,7 +87,7 @@ public class POIDemo {
      * @param o 传入获取值的对象
      * @return
      */
-    private static Object getFieldValueByName(String fieldName, Object o) {
+    private Object getFieldValueByName(String fieldName, Object o) {
         try {
             String firstLetter = fieldName.substring(0, 1).toUpperCase();
             String getter = "get" + firstLetter + fieldName.substring(1);
@@ -97,6 +99,8 @@ public class POIDemo {
             return null;
         }
     }
+
+
 
 
 }

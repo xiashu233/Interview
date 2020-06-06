@@ -37,22 +37,23 @@ public class UserTokenInterceptor implements HandlerInterceptor {
         log.info("--- 开始拦截校验用户是否有Token ---");
 
         String tokenCode = request.getHeader("Token");
-        if (tokenCode != null && !"".equals(tokenCode)){
-
-            return true;
-        }
-        for (Cookie cookie : request.getCookies()) {
-            if ("user_Token".equals(cookie.getName()) && StringUtils.isNotBlank(cookie.getValue())){
-                String token = cookie.getValue();
-                String tokenValue = redisTemplate.opsForValue().get(token).toString();
-                if (StringUtils.isNotBlank(tokenValue)){
-                    // 假设 Apple 是用户类
-                    Apple apple = JSON.parseObject(tokenValue, Apple.class);
-                    // 将用户信息放入 request域
-                    request.setAttribute("memberId",apple.getId());
-                }
-            }
-        }
+        
+//        if (tokenCode != null && !"".equals(tokenCode)){
+//
+//            return true;
+//        }
+//        for (Cookie cookie : request.getCookies()) {
+//            if ("user_Token".equals(cookie.getName()) && StringUtils.isNotBlank(cookie.getValue())){
+//                String token = cookie.getValue();
+//                String tokenValue = redisTemplate.opsForValue().get(token).toString();
+//                if (StringUtils.isNotBlank(tokenValue)){
+//                    // 假设 Apple 是用户类
+//                    Apple apple = JSON.parseObject(tokenValue, Apple.class);
+//                    // 将用户信息放入 request域
+//                    request.setAttribute("memberId",apple.getId());
+//                }
+//            }
+//        }
 
         return true;
     }

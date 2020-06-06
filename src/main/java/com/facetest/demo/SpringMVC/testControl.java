@@ -1,14 +1,15 @@
 package com.facetest.demo.SpringMVC;
 
+import com.facetest.demo.Java8.Apple;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import java.util.Set;
 @RestController
 @Slf4j
 @Api
+@CrossOrigin
 public class testControl {
     @Autowired
     RedisTemplate redisTemplate;
@@ -68,4 +70,34 @@ public class testControl {
         log.info("delete=========="+delete);
         return null;
     }
+
+
+    @RequestMapping("testUploadFile")
+    public String testUploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+        System.out.println(file.getName());
+        return "";
+
+    }
+
+    @PostMapping("/ss/{id}")
+    public String ss(@PathVariable("id")String id){
+        System.out.println(id);
+        return id;
+    }
+
+    @PostMapping("rqbody")
+    public String rqbody(@RequestBody Apple apple){
+        System.out.println(apple);
+        return apple.toString();
+    }
+
+    @PostMapping("getDataNot")
+    public Long getDataNot(Apple apple) throws Exception {
+        throw new Exception("no");
+        // return 1265075615523016700L;
+    }
+
+
+
+
 }
