@@ -1,10 +1,19 @@
 package com.facetest.demo.Redis;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
+
 import java.io.*;
 import java.util.BitSet;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * 布隆过滤器
+ */
 public class BloomFileter implements Serializable {
+
 	private static final long serialVersionUID = -5221305273707291280L;
 	private final int[] seeds;
 	private final int size;
@@ -12,7 +21,30 @@ public class BloomFileter implements Serializable {
 	private final MisjudgmentRate rate;
 	private final AtomicInteger useCount = new AtomicInteger(0);
 	private final Double autoClearRate;
- 
+	public static final String objPath = System.getProperty("user.dir")+ "\\src\\main\\resources\\obj\\BloomFileter.obj";
+
+	private static BloomFileter bloomFileter;
+
+	/**
+	 * 双重校验单例模式且可以恢复数据的布隆过滤器
+	 * @return
+	 */
+	public static BloomFileter getBloomFileter(){
+		if (bloomFileter == null){
+			synchronized (BloomFileter.class){
+				if (bloomFileter == null){
+					bloomFileter = new BloomFileter(1000);
+
+					File file = new File(objPath);
+					if (file.exists()){
+						bloomFileter = readFilterFromFile(objPath);
+					}
+				}
+			}
+		}
+		return bloomFileter;
+	}
+
 	/**
 	 * 默认中等程序的误判率：MisjudgmentRate.MIDDLE 以及不自动清空数据（性能会有少许提升）
 	 * 
@@ -233,6 +265,8 @@ public class BloomFileter implements Serializable {
 		}
 
 		System.out.println(fileter.getUseRate());
+		// 验证布隆过滤器中是否有指定数据
+		System.out.println(fileter.check("asdasd "));
 		System.out.println(fileter.addIfNotExist("1111111111111"));
 		System.out.println(fileter.addIfNotExist("444444444444444"));
 		fileter.saveFilterToFile(filePath);

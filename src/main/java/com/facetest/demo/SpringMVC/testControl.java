@@ -1,6 +1,7 @@
 package com.facetest.demo.SpringMVC;
 
 import com.facetest.demo.Java8.Apple;
+import com.facetest.demo.Redis.BloomFileter;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -140,6 +141,22 @@ public class testControl {
 
         return (long)user_token;
         // return 1265075615523016700L;
+    }
+
+
+    @RequestMapping("testSingleton")
+    public void testSingleton(String data){
+        BloomFileter bloomFileter = BloomFileter.getBloomFileter();
+        System.out.println(bloomFileter.check(data));
+
+    }
+
+    @RequestMapping("testBloomFileterAdd")
+    public void testBloomFileterAdd(String data){
+        BloomFileter bloomFileter = BloomFileter.getBloomFileter();
+        System.out.println(bloomFileter.addIfNotExist(data));
+        bloomFileter.saveFilterToFile(bloomFileter.objPath);
+
     }
 
 
