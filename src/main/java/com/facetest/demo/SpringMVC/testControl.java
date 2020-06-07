@@ -8,12 +8,14 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @Slf4j
@@ -97,6 +99,48 @@ public class testControl {
         // return 1265075615523016700L;
     }
 
+/**
+ * 经过试验得知 Session在用户不关闭浏览器的情况下会一直存在，其原理就是请求时携带JSESSIONID这个Cookie
+ * 通过Cookie来判断是某个用户
+ * @param request
+ * @return
+ */
+    @GetMapping("testSession")
+    public Long testSession(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        Object user_token = session.getAttribute("user_Token");
+
+        boolean flag = false;
+        Cookie userCookie = null;
+        for (Cookie cookie : request.getCookies()) {
+            if ("user_Token".equals(cookie.getName())){
+                flag = true;
+                userCookie = cookie;
+                break;
+            }
+        }
+
+        if (!flag){
+            String userToken = "加密后的数据符合特殊格式";
+            userCookie = new Cookie("user_Token","加密后的数据符合特殊格式");
+            userCookie.setMaxAge(60 * 60 * 24);
+            // 放进 Redis 里
+            redisTemplate.opsForValue().set(userToken,"memberId",24, TimeUnit.HOURS);
+
+            response.addCookie(userCookie);
+        }
+
+        log.info("用户存储的Cookie：" + userCookie.getValue());
+
+        if (user_token == null){
+            Date date = new Date();
+            user_token = date.getTime();
+            session.setAttribute("user_Token",user_token);
+        }
+
+        return (long)user_token;
+        // return 1265075615523016700L;
+    }
 
 
 

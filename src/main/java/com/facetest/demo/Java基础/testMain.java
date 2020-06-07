@@ -1,5 +1,9 @@
 package com.facetest.demo.Java基础;
 
+import com.facetest.demo.exception.HdException;
+import com.facetest.demo.response.ResultVoStatus;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.math.BigDecimal;
@@ -7,9 +11,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
+@Slf4j
 public  class testMain {
-    public synchronized static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         //StringBuffer
         //  Thread;
 //        System.out.println("Hello World");
@@ -42,30 +46,30 @@ public  class testMain {
 //        Date endDate1 = new Date();
 //        System.out.println(endDate1.getTime() - startDate1.getTime());
 
-        List list = new ArrayList();
-        list.add("1");list.add("1");list.add("1");list.add("1");list.add("1");list.add("1");
-        list.add("1");list.add("1");list.add("1");list.add("1");list.add("1");list.add("1");
-        list.add("1");list.add("1");list.add("1");list.add("1");list.add("1");list.add("1");
-        list.add("1");list.add("1");list.add("1");list.add("1");list.add("1");list.add("1");
+        List<String> list = new ArrayList();
+        for (int i = 0; i < 651; i++) {
+            list.add("1");
+        }
         int pageSize = 0;
         if (pageSize <= 0) {
-            throw new Exception("每页存放的数据了太小了");
+            log.error("发生错误 分页页数小于0");
+            throw new HdException(ResultVoStatus.PageSizeException);
         }
 
+        System.out.println(subList(list,pageSize));
+
+
+
+    }
+
+    private static List subList(List list,int pageSize){
         int pageCount = list.size();
         List subList = new ArrayList();
         List subTo;
         for (int i = 0; i < pageCount; i+= pageSize) {
-            if (i + pageSize > pageCount){
-                subTo = list.subList(i,i + (pageCount%pageSize));
-
-            }else{
-                subTo = list.subList(i,i+pageSize);
-            }
+            subTo = i + pageSize > pageCount? list.subList(i,i + (pageCount%pageSize)): list.subList(i,i+pageSize);
             subList.add(subTo);
         }
-        System.out.println(subList);
-
-
+        return subList;
     }
 }

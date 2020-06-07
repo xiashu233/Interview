@@ -1,6 +1,8 @@
 package com.facetest.demo.Mybatis.bean;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +13,8 @@ import java.io.Serializable;
  * 实体类 Student 对应数据库Student表
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student implements Serializable,Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

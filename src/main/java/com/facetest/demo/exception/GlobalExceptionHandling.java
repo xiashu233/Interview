@@ -16,7 +16,27 @@ import java.util.Set;
 @Slf4j
 public class GlobalExceptionHandling {
 
+    // 捕捉自定义异常
+    @ExceptionHandler({HdException.class})
+    public String handleHdException(HttpServletRequest request,Exception e){
+        e.printStackTrace();
+        // 请求方式
+        log.info("请求方式：" + request.getMethod());
+        // 请求路径
+        log.info("请求路径：" + request.getRequestURI());
+        log.info("请求路径：" + request.getAuthType());
+        log.info("请求路径：" + request.getContextPath());
+        log.info("请求路径：" + request.getPathInfo());
+        // 获取请求参数
+        Map<String, String[]> maps = request.getParameterMap();
+        StringBuffer sb = new StringBuffer();
+        for (Map.Entry<String, String[]> entry : maps.entrySet()) {
+            sb.append(entry.getKey() + ":" + Arrays.toString(entry.getValue()) + ";") ;
+        }
+        log.info("请求路径：" + sb.toString());
 
+        return "Error";
+    }
 
 
     // Exception 是所有异常的父类 所以能捕捉到所有的异常
@@ -39,5 +59,10 @@ public class GlobalExceptionHandling {
         log.info("请求路径：" + sb.toString());
 
         return "Error";
+    }
+
+    // 保存日志
+    public void saveLog(HttpServletRequest request,Exception e){
+        log.info("保存日志");
     }
 }

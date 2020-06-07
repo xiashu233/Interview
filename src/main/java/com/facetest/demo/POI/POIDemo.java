@@ -2,6 +2,8 @@ package com.facetest.demo.POI;
 
 import com.facetest.demo.Mybatis.bean.Student;
 import com.facetest.demo.Mybatis.mapper.StudentMapper;
+import com.facetest.demo.utils.ListUtil;
+import com.facetest.demo.utils.ZipUtil;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -11,11 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,6 +87,80 @@ public class POIDemo {
         }
 
     }
+    @RequestMapping("batchExcel")
+    public String batchExcel(HttpServletRequest request,HttpServletResponse response){
+        String path = System.getProperty("user.dir")+ "\\src\\main\\resources\\excels\\";
+        long time = new Date().getTime();
+        List<String> fileList = new ArrayList<>();
+
+        try {
+            List<Student> students = new ArrayList<>();
+
+            for (int i = 0; i < 14321; i++) {
+                students.add(new Student(1,"张三",23,"随机人物"));
+            }
+
+            // 排序 按照 StuAge 升序  reversed 降序 分组后修改将会报错
+            // students.sort(Comparator.comparing(Student::getStuAge).reversed());
+
+            List<List<Student>> studentPages = ListUtil.subList(students, 1000);
+            for (int index = 0; index < studentPages.size(); index++) {
+
+                HSSFWorkbook wb = new HSSFWorkbook();
+                HSSFSheet sheet = wb.createSheet("班级所有学生信息");
+                HSSFRow row = sheet.createRow(0);
+                Field[] declaredFields = Student.class.getDeclaredFields();
+                int length = declaredFields.length;
+                for (int i = 0; i < length; i++) {
+                    row.createCell(i).setCellValue(declaredFields[i].getName());
+                }
+
+
+                int size = studentPages.get(index).size();
+                HSSFRow commRow = null;
+                for (int i = 0; i < size; i++) {
+                    Student student = studentPages.get(index).get(i);
+                    commRow = sheet.createRow(i + 1);
+                    for (int j = 0; j < length; j++) {
+                        commRow.createCell(j).setCellValue(getFieldValueByName(declaredFields[j].getName(),student).toString());
+                    }
+                }
+
+                OutputStream output = null;
+                // 输出Excel文件供网页下载
+                // output = response.getOutputStream();
+                // 输出到本地
+                String filePath = path + (time + index) + ".xls";
+                output = new FileOutputStream(filePath);
+                fileList.add(filePath);
+                // 清空缓冲区 以便填充数据
+                response.reset();
+
+                // 设置文件头
+//                response.setHeader("Content-Disposition",
+//                        "attchement;filename=" + new String("学生信息.xls".getBytes("gb2312"), "ISO8859-1"));
+//                response.setContentType("application/msexcel");
+
+                wb.write(output);
+                // 刷新此输出流，强制写出所有缓冲的输出字节
+                output.flush();
+                output.close();
+                wb.close();
+            }
+
+            ZipUtil.downloadZipFiles(response,fileList,"StudentInfoZip");
+
+            for (String s : fileList) {
+                File file = new File(s);
+                file.delete();
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return path;
+    }
 
     /**
      * 根据属性名获取属性值
@@ -99,6 +180,8 @@ public class POIDemo {
             return null;
         }
     }
+
+
 
 
 
