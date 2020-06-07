@@ -87,21 +87,26 @@ public class POIDemo {
         }
 
     }
+
+    /**
+     * 将查询记录进行分页导出Excel最后压缩成Zip
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping("batchExcel")
     public String batchExcel(HttpServletRequest request,HttpServletResponse response){
         String path = System.getProperty("user.dir")+ "\\src\\main\\resources\\excels\\";
         long time = new Date().getTime();
         List<String> fileList = new ArrayList<>();
-
+        // 防止并发量过高导致文件名相同 前缀加上 memberId
+        int memberId = (int) (Math.random() * 100 );
         try {
             List<Student> students = new ArrayList<>();
-
-            for (int i = 0; i < 14321; i++) {
+            // 模拟数据库数据
+            for (int i = 0; i < 192658; i++) {
                 students.add(new Student(1,"张三",23,"随机人物"));
             }
-
-            // 排序 按照 StuAge 升序  reversed 降序 分组后修改将会报错
-            // students.sort(Comparator.comparing(Student::getStuAge).reversed());
 
             List<List<Student>> studentPages = ListUtil.subList(students, 1000);
             for (int index = 0; index < studentPages.size(); index++) {
@@ -115,7 +120,6 @@ public class POIDemo {
                     row.createCell(i).setCellValue(declaredFields[i].getName());
                 }
 
-
                 int size = studentPages.get(index).size();
                 HSSFRow commRow = null;
                 for (int i = 0; i < size; i++) {
@@ -127,19 +131,13 @@ public class POIDemo {
                 }
 
                 OutputStream output = null;
-                // 输出Excel文件供网页下载
-                // output = response.getOutputStream();
+
                 // 输出到本地
-                String filePath = path + (time + index) + ".xls";
+                String filePath =  path + memberId + (time + index) + ".xls";
                 output = new FileOutputStream(filePath);
                 fileList.add(filePath);
                 // 清空缓冲区 以便填充数据
                 response.reset();
-
-                // 设置文件头
-//                response.setHeader("Content-Disposition",
-//                        "attchement;filename=" + new String("学生信息.xls".getBytes("gb2312"), "ISO8859-1"));
-//                response.setContentType("application/msexcel");
 
                 wb.write(output);
                 // 刷新此输出流，强制写出所有缓冲的输出字节
@@ -150,8 +148,9 @@ public class POIDemo {
 
             ZipUtil.downloadZipFiles(response,fileList,"StudentInfoZip");
 
-            for (String s : fileList) {
-                File file = new File(s);
+            // 删除文件
+            for (String thisFile : fileList) {
+                File file = new File(thisFile);
                 file.delete();
             }
 
@@ -180,10 +179,6 @@ public class POIDemo {
             return null;
         }
     }
-
-
-
-
 
 
 }
