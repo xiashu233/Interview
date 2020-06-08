@@ -9,7 +9,7 @@ import java.util.List;
  * 具体的实现类
  */
 @Service
-public class AppleServiceImpl implements AppleService {
+public class AppleServiceByProImpl implements AppleServiceByPro {
     @Override
     public Apple select(int id) {
         return null;

@@ -8,6 +8,7 @@ import com.facetest.demo.Mybatis.bean.Student;
 import com.facetest.demo.Mybatis.bean.User;
 import com.facetest.demo.Mybatis.mapper.SkuMapper;
 import com.facetest.demo.Mybatis.mapper.UserMapper;
+import com.facetest.demo.Mybatis.service.SkuServiceByPro;
 import com.facetest.demo.Mybatis.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.sql.Wrapper;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,8 +53,14 @@ class DemoApplicationTests {
     @Autowired
     SkuMapper skuMapper;
 
+    @Autowired
+    SkuServiceByPro skuService;
+
     @Test
     public void select() {
+
+
+
         List<User> studentAll = mapper.selectList(null);
         //
         studentAll.forEach(System.out::println);

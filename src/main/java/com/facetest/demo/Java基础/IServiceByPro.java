@@ -8,7 +8,7 @@ import java.util.List;
  * 通用化接口
  * @param <T>
  */
-public interface IService<T> {
+public interface IServiceByPro<T> {
 
     T select(int id);
 
