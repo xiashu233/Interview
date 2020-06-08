@@ -1,6 +1,8 @@
 package com.facetest.demo.SpringMVC;
 
+import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.facetest.demo.Java8.Apple;
 import com.facetest.demo.Mybatis.bean.Student;
 import com.facetest.demo.Mybatis.mapper.StudentMapper;
@@ -192,6 +194,8 @@ public class testControl {
 
     @RequestMapping("testMyBatisPlus")
     public void testMyBatisPlus(){
+        Wrapper<Student> studentWrapper = new QueryWrapper<>();
+
         List<Student> students = studentMapper.selectList(null);
         students.forEach(System.out::println);
 
