@@ -10,7 +10,7 @@ import java.util.BitSet;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 布隆过滤器
+ * 布隆过滤器 防止缓存穿透
  */
 public class BloomFileter implements Serializable {
 

@@ -2,6 +2,7 @@ package com.facetest.demo.POI;
 
 import com.facetest.demo.Mybatis.bean.Student;
 import com.facetest.demo.Mybatis.mapper.StudentMapper;
+//import com.facetest.demo.Mybatis.service.StudentService;
 import com.facetest.demo.utils.ListUtil;
 import com.facetest.demo.utils.ZipUtil;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -33,13 +34,17 @@ import java.util.stream.Collectors;
 public class POIDemo {
 
 
-    @Autowired
-    StudentMapper studentMapper;
+//    @Autowired
+//    StudentMapper studentMapper;
+
+//    @Autowired
+//    StudentService studentService;
 
     @RequestMapping("testExcel")
     public void testExcel(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            List<Student> students = studentMapper.selectAll();
+            List<Student> students = new ArrayList<>();
+            // List<Student> students = studentMapper.selectList(null);
             HSSFWorkbook wb = new HSSFWorkbook();
             HSSFSheet sheet = wb.createSheet("班级所有学生信息");
             HSSFRow row = sheet.createRow(0);

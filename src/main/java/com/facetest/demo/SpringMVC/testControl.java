@@ -1,11 +1,15 @@
 package com.facetest.demo.SpringMVC;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.facetest.demo.Java8.Apple;
+import com.facetest.demo.Mybatis.bean.Student;
+import com.facetest.demo.Mybatis.mapper.StudentMapper;
 import com.facetest.demo.Redis.BloomFileter;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +29,11 @@ import java.util.concurrent.TimeUnit;
 public class testControl {
     @Autowired
     RedisTemplate redisTemplate;
+
+    @Autowired
+    StudentMapper studentMapper;
+
+
 
     @RequestMapping("testRedisHash")
     public Object testRedisHash(){
@@ -143,7 +152,10 @@ public class testControl {
         // return 1265075615523016700L;
     }
 
-
+    /**
+     * 使用布隆过滤器
+     * @param data
+     */
     @RequestMapping("testSingleton")
     public void testSingleton(String data){
         BloomFileter bloomFileter = BloomFileter.getBloomFileter();
@@ -151,11 +163,37 @@ public class testControl {
 
     }
 
+    /**
+     * 添加布隆过滤器的值
+     * @param data
+     */
     @RequestMapping("testBloomFileterAdd")
     public void testBloomFileterAdd(String data){
         BloomFileter bloomFileter = BloomFileter.getBloomFileter();
         System.out.println(bloomFileter.addIfNotExist(data));
         bloomFileter.saveFilterToFile(bloomFileter.objPath);
+
+    }
+
+    @RequestMapping("testTransactional")
+    // 添加事务 一般在Service层使用 指定发生什么错误时回滚事务
+    // rollbackFor：触发回滚的异常，默认是RuntimeException和Error
+    // isolation: 事务的隔离级别，默认是Isolation.DEFAULT也就是数据库自身的默认隔离级别，比如MySQL是ISOLATION_REPEATABLE_READ可重复读
+    @Transactional(rollbackFor = {RuntimeException.class,Error.class})
+    public void testTransactional(){
+        Student stu1 = new Student(6,"zs",23,"asd");
+        Student stu2 = new Student(7,"ls",23,"asd");
+        Student stu3 = new Student(1,"zs",23,"asd");
+
+        studentMapper.insert(stu1);
+        studentMapper.insert(stu2);
+        // studentMapper.insert(stu3);
+    }
+
+    @RequestMapping("testMyBatisPlus")
+    public void testMyBatisPlus(){
+        List<Student> students = studentMapper.selectList(null);
+        students.forEach(System.out::println);
 
     }
 
