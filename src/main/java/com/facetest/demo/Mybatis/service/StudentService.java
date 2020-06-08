@@ -8,4 +8,6 @@ import org.springframework.stereotype.Component;
  * 继承 MybatisPlus 的通用IService接口
  */
 public interface StudentService extends IService<Student> {
+
+    public ThreadLocal t = new ThreadLocal();
 }

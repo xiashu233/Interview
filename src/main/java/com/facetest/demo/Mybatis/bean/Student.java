@@ -17,11 +17,11 @@ import java.io.Serializable;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+    @AllArgsConstructor
 public class Student implements Serializable,Cloneable {
     @Id
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.INPUT)
     private Integer stuId;
     private String stuName;
     private Integer stuAge;

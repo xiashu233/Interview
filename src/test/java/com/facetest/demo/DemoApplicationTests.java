@@ -8,7 +8,7 @@ import com.facetest.demo.Mybatis.bean.Student;
 import com.facetest.demo.Mybatis.bean.User;
 import com.facetest.demo.Mybatis.mapper.SkuMapper;
 import com.facetest.demo.Mybatis.mapper.UserMapper;
-import com.facetest.demo.Mybatis.service.SkuServiceByPro;
+import com.facetest.demo.Mybatis.service.SkuService;
 import com.facetest.demo.Mybatis.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,7 +55,7 @@ class DemoApplicationTests {
     SkuMapper skuMapper;
 
     @Autowired
-    SkuServiceByPro skuService;
+    SkuService skuService;
 
     @Test
     public void select() {
@@ -94,12 +95,20 @@ class DemoApplicationTests {
      * </p>
      */
     @Test
+    @Transactional(rollbackFor = {RuntimeException.class,Error.class})
     public void insertLoads() {
-        User user = new User();
-        user.setEmail("lqf@163.com");
-        user.setAge(12);
+        Integer insert = 0;
+        try {
+            User user = new User();
+            user.setId(6L);
+            user.setName("liang");
+            user.setEmail("lqf@163.com");
+            user.setAge(12);
 
-        Integer insert = mapper.insert(user);
+            insert = mapper.insert(user);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         System.out.println("return insert value = " + insert);
     }
 

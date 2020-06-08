@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.facetest.demo.Java8.Apple;
 import com.facetest.demo.Mybatis.bean.Student;
 import com.facetest.demo.Mybatis.mapper.StudentMapper;
+import com.facetest.demo.Mybatis.service.StudentService;
 import com.facetest.demo.Redis.BloomFileter;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +35,10 @@ public class testControl {
 
     @Autowired
     StudentMapper studentMapper;
-
+    @Autowired
+    StudentService studentService;
+//    @Autowired
+//    Student student;
 
 
     @RequestMapping("testRedisHash")
@@ -187,9 +191,9 @@ public class testControl {
         Student stu2 = new Student(7,"ls",23,"asd");
         Student stu3 = new Student(1,"zs",23,"asd");
 
-        studentMapper.insert(stu1);
-        studentMapper.insert(stu2);
-        // studentMapper.insert(stu3);
+        System.out.println(studentService.save(stu1));
+        System.out.println(studentService.save(stu2));
+        System.out.println(studentService.save(stu3));
     }
 
     @RequestMapping("testMyBatisPlus")
@@ -199,8 +203,53 @@ public class testControl {
         List<Student> students = studentMapper.selectList(null);
         students.forEach(System.out::println);
 
+
+
     }
 
+    @RequestMapping("testThreadLocal")
+    public void testThreadLocal(){
+        studentService.t.set("主线程");
+        new Thread(()->{
+            studentService.t.set("Thread1");
+            for (int i = 0; i < 100; i++) {
+                System.out.println("Thread1-----" + studentService.t.get().toString());
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        },"线程1").start();
 
+        new Thread(()->{
+            studentService.t.set("Thread2");
+            for (int i = 0; i < 100; i++) {
+                System.out.println("Thread2-----" + studentService.t.get().toString());
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        },"线程2").start();
+
+        new Thread(()->{
+            studentService.t.set("Thread3");
+            for (int i = 0; i < 100; i++) {
+                System.out.println("Thread3-----" + studentService.t.get().toString());
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        },"线程3").start();
+    }
+
+    @RequestMapping("testBean")
+    public void testBean(){
+        // System.out.println(student);
+    }
 
 }
