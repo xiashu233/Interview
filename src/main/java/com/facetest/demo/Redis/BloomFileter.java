@@ -1,10 +1,5 @@
 package com.facetest.demo.Redis;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
-
 import java.io.*;
 import java.util.BitSet;
 import java.util.concurrent.atomic.AtomicInteger;

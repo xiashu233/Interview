@@ -1,6 +1,6 @@
 package com.facetest.demo.config;
 
-import com.facetest.demo.Spring.UserTokenInterceptor;
+import com.facetest.demo.Spring.AOP.UserTokenInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

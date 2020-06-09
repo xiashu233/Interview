@@ -8,6 +8,8 @@ import com.facetest.demo.Mybatis.bean.Student;
 import com.facetest.demo.Mybatis.mapper.StudentMapper;
 import com.facetest.demo.Mybatis.service.StudentService;
 import com.facetest.demo.Redis.BloomFileter;
+
+import com.facetest.demo.Spring.IOC.TeacherBean;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,8 @@ public class testControl {
     StudentService studentService;
 //    @Autowired
 //    Student student;
+    @Autowired
+    TeacherBean teacherBean;
 
 
     @RequestMapping("testRedisHash")
@@ -250,6 +254,9 @@ public class testControl {
     @RequestMapping("testBean")
     public void testBean(){
         // System.out.println(student);
+        teacherBean.sayStudent();
     }
+
+
 
 }
