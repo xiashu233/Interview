@@ -4,10 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.facetest.demo.Mybatis.mapper.TeacherMapper">
 
+    <!-- 开启 Ehcache 二级缓存 -->
+<!--    <cache type="org.mybatis.caches.ehcache.EhcacheCache">-->
+<!--        &lt;!&ndash; 如果不想用 Ehcache 配置的属性值 可以自己在 本cache 中配置 属性值 通过 property 指定属性名和属性值 &ndash;&gt;-->
+<!--        <property name="maxElementsInMemory" value="2000"/>-->
+<!--    </cache>-->
+
+    <!-- 一对多 -->
     <select id="selectAllTeacherAndTheStudent" resultMap="allTeacher">
         SELECT * FROM teacher LEFT JOIN student ON teacher.student_id = student.stu_id
     </select>
-
+    <!-- 一对多使用 collection 指定 -->
     <resultMap id="allTeacher" type="com.facetest.demo.Mybatis.bean.Teacher">
         <id  property="teacherId" column="teacher_id"></id>
         <collection property="students" ofType="com.facetest.demo.Mybatis.bean.Student" autoMapping="true">

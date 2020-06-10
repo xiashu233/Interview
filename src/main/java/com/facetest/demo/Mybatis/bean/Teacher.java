@@ -11,9 +11,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Teacher implements Serializable {
+public class Teacher  extends Person implements Serializable {
     private Integer teacherId;
-    // private Integer studentId;
+
+  // private Integer studentId;
 
     @Transient
     private List<Student> students;

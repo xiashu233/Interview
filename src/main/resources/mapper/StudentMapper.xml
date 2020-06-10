@@ -6,7 +6,10 @@
 
 
     <select id="selectStudentByNameAndAgeJ" resultType="com.facetest.demo.Mybatis.bean.Student">
-        select * from student where stu_name = #{param1} and stu_age = #{param2}
+        select * from student
+        <where >
+
+        </where>
     </select>
 
     <select id="selectStudentByNameAndAgeD" resultType="com.facetest.demo.Mybatis.bean.Student">

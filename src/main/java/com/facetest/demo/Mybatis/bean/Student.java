@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student implements Serializable,Cloneable {
+public class Student extends Person implements Serializable,Cloneable {
     @Id
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(type = IdType.INPUT)

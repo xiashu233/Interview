@@ -1,3 +1,5 @@
-my:
-  name: zhangsan
-  age: 18
+#spring:
+#  data:
+#    elasticsearch:
+#      cluster-nodes: 120.79.52.91:9200
+#      cluster-name: es-wyf

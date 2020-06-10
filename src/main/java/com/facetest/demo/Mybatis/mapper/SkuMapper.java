@@ -8,4 +8,5 @@ import com.facetest.demo.Mybatis.bean.Student;
  * 继承 MybatisPlus 的通用Mapper
  */
 public interface SkuMapper extends BaseMapper<Sku>  {
+
 }

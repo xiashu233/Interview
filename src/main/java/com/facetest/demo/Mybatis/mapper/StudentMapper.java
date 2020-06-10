@@ -13,4 +13,7 @@ public interface StudentMapper extends BaseMapper<Student> {
     Student selectStudentByNameAndAgeJ(String name,Integer age);
 
     Student selectStudentByNameAndAgeD(String name,Integer age);
+
+
+
 }

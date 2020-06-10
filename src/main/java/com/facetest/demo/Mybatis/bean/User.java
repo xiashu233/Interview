@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 @Data
-public class User {
+public class User extends Person {
     @TableId(type = IdType.INPUT)
     private Long id;
     private String name;

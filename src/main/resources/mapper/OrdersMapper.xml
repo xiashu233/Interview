@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.facetest.demo.Mybatis.mapper.OrdersMapper">
+
+    <!-- 一对一 -->
+    <select id="selectOrderAndStudent" resultMap="allOrder">
+        SELECT
+            *
+        FROM
+            student
+        LEFT JOIN orders ON student.stu_id = orders.student_id
+        WHERE
+            student.stu_id = #{studentId}
+    </select>
+
+    <select id="selects" resultType="com.facetest.demo.Mybatis.bean.Orders">
+        select * from orders
+    </select>
+
+<!--    <select id="selects" resultType="com.facetest.demo.Mybatis.bean.Orders" parameterType="Integer">-->
+<!--        select * from orders where order_id = #{orderId}-->
+<!--    </select>-->
+
+    <!-- 一对一使用 association 指定 -->
+    <resultMap id="allOrder" type="com.facetest.demo.Mybatis.bean.Orders">
+        <id  property="orderId" column="order_id"></id>
+        <association property="student" javaType="com.facetest.demo.Mybatis.bean.Student" autoMapping="true" >
+            <id property="stuId" column="stu_id"></id>
+        </association>
+    </resultMap>
+</mapper>
