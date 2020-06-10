@@ -125,11 +125,15 @@ public class testControl {
     public void testTransactional(){
         Student stu1 = new Student(6,"zs",23,"asd");
         Student stu2 = new Student(7,"ls",23,"asd");
+        // 数据库中已经有了 id = 1的记录，所以在之后插入中将会报错
         Student stu3 = new Student(1,"zs",23,"asd");
 
         System.out.println(studentService.save(stu1));
         System.out.println(studentService.save(stu2));
+        // 执行时报错 触发事务回滚
         System.out.println(studentService.save(stu3));
+        List link = new LinkedList();
+        link.get(0);
     }
 
     @RequestMapping("testMyBatisPlus")
