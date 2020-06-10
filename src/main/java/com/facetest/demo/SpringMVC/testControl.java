@@ -153,6 +153,7 @@ public class testControl {
         new Thread(()->{
             studentService.t.set("Thread1");
             for (int i = 0; i < 100; i++) {
+                studentService.t.set("Thread1");
                 System.out.println("Thread1-----" + studentService.t.get().toString());
                 try {
                     Thread.sleep(10);
@@ -165,6 +166,7 @@ public class testControl {
         new Thread(()->{
             studentService.t.set("Thread2");
             for (int i = 0; i < 100; i++) {
+                studentService.t.set("Thread2");
                 System.out.println("Thread2-----" + studentService.t.get().toString());
                 try {
                     Thread.sleep(10);
@@ -177,6 +179,7 @@ public class testControl {
         new Thread(()->{
             studentService.t.set("Thread3");
             for (int i = 0; i < 100; i++) {
+                studentService.t.set("Thread3");
                 System.out.println("Thread3-----" + studentService.t.get().toString());
                 try {
                     Thread.sleep(10);

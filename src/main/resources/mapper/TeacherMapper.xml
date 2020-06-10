@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.facetest.demo.Mybatis.mapper.TeacherMapper">
+
+    <select id="selectAllTeacherAndTheStudent" resultMap="allTeacher">
+        SELECT * FROM teacher LEFT JOIN student ON teacher.student_id = student.stu_id
+    </select>
+
+    <resultMap id="allTeacher" type="com.facetest.demo.Mybatis.bean.Teacher">
+        <id  property="teacherId" column="teacher_id"></id>
+        <collection property="students" ofType="com.facetest.demo.Mybatis.bean.Student" autoMapping="true">
+            <id property="stuId" column="stu_id"></id>
+        </collection>
+    </resultMap>
+</mapper>

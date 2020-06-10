@@ -17,7 +17,7 @@ import java.io.Serializable;
  */
 @Data
 @NoArgsConstructor
-    @AllArgsConstructor
+@AllArgsConstructor
 public class Student implements Serializable,Cloneable {
     @Id
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
