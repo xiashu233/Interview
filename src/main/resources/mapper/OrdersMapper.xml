@@ -15,13 +15,15 @@
             student.stu_id = #{studentId}
     </select>
 
+
+    <select id="selects" resultType="com.facetest.demo.Mybatis.bean.Orders" parameterType="Integer">
+        select * from orders where order_id = #{orderId}
+    </select>
+
     <select id="selects" resultType="com.facetest.demo.Mybatis.bean.Orders">
         select * from orders
     </select>
 
-<!--    <select id="selects" resultType="com.facetest.demo.Mybatis.bean.Orders" parameterType="Integer">-->
-<!--        select * from orders where order_id = #{orderId}-->
-<!--    </select>-->
 
     <!-- 一对一使用 association 指定 -->
     <resultMap id="allOrder" type="com.facetest.demo.Mybatis.bean.Orders">

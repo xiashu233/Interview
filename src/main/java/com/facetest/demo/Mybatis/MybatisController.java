@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -61,11 +62,21 @@ public class MybatisController {
     @RequestMapping("testInterFaceOverride")
     public void testInterFaceOverride(){
         List<Orders> selects = ordersMapper.selects();
-        List<Orders> selects1 = ordersMapper.selects(1);
+        List<Orders> selects1 = ordersMapper.selects(500);
 
-        List<Student> list = studentService.list();
+//        List<Student> list = studentService.list();
         log.info(selects.toString());
         log.info(selects1.toString());
+    }
+
+    // 批量操作 具有原子性
+    @RequestMapping("testBatchExecutor")
+    public void testBatchExecutor(){
+        List<Student> students = new ArrayList<>();
+        students.add(new Student(6,"ls",10,"hap"));
+        students.add(new Student(7,"ls",10,"hap"));
+        students.add(new Student(7,"ls",10,"hap"));
+        studentService.saveBatch(students);
     }
 
 }

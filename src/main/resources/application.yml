@@ -3,3 +3,7 @@
 #    elasticsearch:
 #      cluster-nodes: 120.79.52.91:9200
 #      cluster-name: es-wyf
+
+#mybatis:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

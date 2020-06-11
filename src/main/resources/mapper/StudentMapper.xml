@@ -8,7 +8,7 @@
     <select id="selectStudentByNameAndAgeJ" resultType="com.facetest.demo.Mybatis.bean.Student">
         select * from student
         <where >
-
+            stu_id = #{param1}
         </where>
     </select>
 
