@@ -13,12 +13,12 @@ import java.util.concurrent.TimeUnit;
 public class ThreadController {
 
     @Autowired
-    ScheduledExecutorService scheduledExecutorService;
+    ScheduledExecutorService globalScheduledExecutorService;
 
     // scheduledExecutorService 实现的延迟队列
     @RequestMapping("addThreadFunc")
     public void addThreadFunc(){
-        scheduledExecutorService.schedule(()->{
+        globalScheduledExecutorService.schedule(()->{
             System.out.println("通过Controller实现的延迟队列 --- " + Thread.currentThread().getName());
         },10, TimeUnit.SECONDS);
     }

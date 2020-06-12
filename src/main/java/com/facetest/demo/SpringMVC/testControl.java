@@ -26,11 +26,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
 @Api
 @CrossOrigin
+@RequestMapping("/SpringMVC")
 public class testControl {
     @Autowired
     RedisTemplate redisTemplate;
@@ -194,6 +196,32 @@ public class testControl {
     public void testBean(){
         // System.out.println(student);
         teacherBean.sayStudent();
+    }
+
+
+    @RequestMapping("addCookie")
+    public void addCookie(HttpServletRequest request,HttpServletResponse response){
+        Cookie testCookie = new Cookie("token","32" + new Date().getTime() + "11");
+        testCookie.setMaxAge(10 * 60);
+        response.addCookie(testCookie);
+
+    }
+
+    /**
+     * 值得一说的就是，IDEA的自测工具并不能很好的测试出cookie，
+     * 所以cookie是跟随着浏览器请求来传输的
+     * @param request
+     */
+    @RequestMapping("getAllCookies")
+    public void getAllCookies(HttpServletRequest request){
+        // System.out.println(student);
+        Cookie[] cookies = request.getCookies();
+        String cookiesStr = "";
+        if (cookies != null){
+            cookiesStr = Arrays.stream(cookies).map(c -> c.getName() + "=" + c.getValue()).collect(Collectors.joining(","));
+        }
+        log.info(cookiesStr);
+
     }
 
 
