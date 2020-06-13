@@ -2,10 +2,7 @@ package com.facetest.demo.Mybatis;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.facetest.demo.Mybatis.bean.Orders;
-import com.facetest.demo.Mybatis.bean.Person;
-import com.facetest.demo.Mybatis.bean.Student;
-import com.facetest.demo.Mybatis.bean.Teacher;
+import com.facetest.demo.Mybatis.bean.*;
 import com.facetest.demo.Mybatis.mapper.OrdersMapper;
 import com.facetest.demo.Mybatis.mapper.StudentMapper;
 import com.facetest.demo.Mybatis.mapper.TeacherMapper;
@@ -14,6 +11,7 @@ import com.facetest.demo.Mybatis.service.StudentService;
 import com.facetest.demo.response.ResponseResultVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
+@CrossOrigin
 @RestController
 @RequestMapping("/Mybatis")
 public class MybatisController {
@@ -88,7 +87,9 @@ public class MybatisController {
      * 而不使用PageHelp的时候，会发现分页命令并没有执行，所以我在这里注释掉了PageHelp的Maven依赖
      * MybatisPlus分页也挺好用的 所以没必要使用PageHelp了
      * @param pageNum 页码
-     * @param pageSize  当前页的数量
+     * @param pageSize 页内数量
+     * @return 统一返回类型
+     * @PageBean 封装的页类型
      */
     @RequestMapping("testPage")
     public ResponseResultVo testPage(int pageNum, int pageSize){
@@ -97,8 +98,9 @@ public class MybatisController {
         List<Student> students = studentQueryPage.getRecords();
         log.info(students.toString());
         long pages = studentQueryPage.getPages();
+        PageBean<List<Student>> pageBean = new PageBean<>(pages,students,pageNum,pageSize,studentQueryPage.getTotal(),pageNum>1,pageNum<pages);
 
-        return ResponseResultVo.success(students);
+        return ResponseResultVo.success(pageBean);
 
     }
 
