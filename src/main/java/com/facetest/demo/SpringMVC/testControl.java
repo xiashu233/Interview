@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -200,9 +201,10 @@ public class testControl {
 
 
     @RequestMapping("addCookie")
-    public void addCookie(HttpServletRequest request,HttpServletResponse response){
+    public void addCookie(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         Cookie testCookie = new Cookie("token","32" + new Date().getTime() + "11");
         testCookie.setMaxAge(10 * 60);
+        // request.getRequestDispatcher("跳转页面path").forward(request,response);
         response.addCookie(testCookie);
 
     }

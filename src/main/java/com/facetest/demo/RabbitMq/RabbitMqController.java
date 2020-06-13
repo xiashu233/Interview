@@ -39,4 +39,10 @@ public class RabbitMqController {
         rabbitTemplate.convertAndSend(queues,routKey,msg);
     }
 
+    @RequestMapping("sendMsgByTopicModel")
+    public void sendMsgByTopicModel(String queues,String routKey, Student msg){
+        rabbitTemplate.convertAndSend(queues,routKey,msg);
+    }
+
+
 }

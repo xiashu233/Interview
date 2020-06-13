@@ -9,6 +9,7 @@ import com.facetest.demo.Mybatis.mapper.TeacherMapper;
 import com.facetest.demo.Mybatis.service.StudentService;
 //import com.github.pagehelper.PageHelper;
 import com.facetest.demo.response.ResponseResultVo;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -92,6 +93,7 @@ public class MybatisController {
      * @PageBean 封装的页类型
      */
     @RequestMapping("testPage")
+    @ApiOperation(value = "post请求调用示例", notes = "invokePost说明", httpMethod = "POST")
     public ResponseResultVo testPage(int pageNum, int pageSize){
         IPage<Student> studentQueryPage = new Page<>(pageNum,pageSize);
         studentMapper.selectPage(studentQueryPage, null);
