@@ -9,6 +9,9 @@ import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
+/**
+ * 路由模式 根据key数组中的值来选择使用哪个监听器，可以被多个消费者消费
+ */
 @Component
 @Slf4j
 public class RoutKeyConsumer {

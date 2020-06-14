@@ -9,7 +9,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 /**
- * 动态路由
+ * 动态路由 相比于路由模式多加了通配符的概念
  * 通配符： * 代表任意一个
  *          # 代表任意个任意字符
  *

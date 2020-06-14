@@ -1,4 +1,4 @@
-package com.facetest.demo.response;
+package com.facetest.demo.Response;
 
 public enum ResultVoStatus {
     OK(200,"请求成功"),

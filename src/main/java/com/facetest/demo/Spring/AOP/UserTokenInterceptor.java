@@ -34,9 +34,9 @@ public class UserTokenInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        log.info("--- 开始拦截校验用户是否有Token ---");
+//        log.info("--- 开始拦截校验用户是否有Token ---");
 
-        String tokenCode = request.getHeader("Token");
+//        String tokenCode = request.getHeader("Token");
         
 //        if (tokenCode != null && !"".equals(tokenCode)){
 //

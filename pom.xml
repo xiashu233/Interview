@@ -220,6 +220,13 @@
             <version>2.9.2</version>
         </dependency>
 
+        <!-- FastDFS -->
+        <dependency>
+            <groupId>com.github.tobato</groupId>
+            <artifactId>fastdfs-client</artifactId>
+            <version>1.26.5</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -8,7 +8,7 @@ import com.facetest.demo.Mybatis.mapper.StudentMapper;
 import com.facetest.demo.Mybatis.mapper.TeacherMapper;
 import com.facetest.demo.Mybatis.service.StudentService;
 //import com.github.pagehelper.PageHelper;
-import com.facetest.demo.response.ResponseResultVo;
+import com.facetest.demo.Response.ResponseResultVo;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

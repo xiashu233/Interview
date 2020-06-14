@@ -1,9 +1,8 @@
-package com.facetest.demo.response;
+package com.facetest.demo.Response;
 
 
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 @Data

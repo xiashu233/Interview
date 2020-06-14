@@ -1,14 +1,8 @@
 package com.facetest.demo.Java基础;
 
-import com.facetest.demo.exception.HdException;
-import com.facetest.demo.response.ResultVoStatus;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.formula.functions.T;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -53,7 +47,7 @@ public  class testMain {
         int pageSize = 0;
         if (pageSize <= 0) {
             log.error("发生错误 分页页数小于0");
-            throw new HdException(ResultVoStatus.PageSizeException);
+            // throw new HdException(ErrorCode.PageSizeException);
         }
 
         System.out.println(subList(list,pageSize));
