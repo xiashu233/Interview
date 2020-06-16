@@ -2,8 +2,9 @@ package com.facetest.demo.Java基础;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 @Slf4j
 public  class testMain {
@@ -40,23 +41,45 @@ public  class testMain {
 //        Date endDate1 = new Date();
 //        System.out.println(endDate1.getTime() - startDate1.getTime());
 
-        List<String> list = new ArrayList();
-        for (int i = 0; i < 651; i++) {
-            list.add("1");
-        }
-        int pageSize = 0;
-        if (pageSize <= 0) {
-            log.error("发生错误 分页页数小于0");
-            // throw new HdException(ErrorCode.PageSizeException);
-        }
+        // Math.round 大于0.5向上取整
+//        System.out.println(Math.round(-24.6));
+//        System.out.println(Math.round(-32.2));
 
-        System.out.println(subList(list,pageSize));
+        System.out.println(new String("通话").hashCode() + "--" + new String("重地").hashCode());
+
+//        List<String> list = new ArrayList();
+//        for (int i = 0; i < 651; i++) {
+//            list.add("1");
+//        }
+//        int pageSize = 0;
+//        if (pageSize <= 0) {
+//            log.error("发生错误 分页页数小于0");
+//            // throw new HdException(ErrorCode.PageSizeException);
+//        }
+//
+//        System.out.println(subList(list,pageSize));
 
 
 
     }
 
     private static List subList(List list,int pageSize){
+        // 方法中定义的常量可以两段式赋值
+        final String a;
+        ConcurrentLinkedDeque concurrentLinkedDeque = new ConcurrentLinkedDeque();
+        concurrentLinkedDeque.add("the");
+        Object poll = concurrentLinkedDeque.poll();
+
+
+        Map m;
+        Stack stack;
+        LinkedList lk = new LinkedList();
+        lk.add("add");
+        lk.add("this");
+        lk.add("proper");
+        lk.add(1,"insert");
+
+
         int pageCount = list.size();
         List subList = new ArrayList();
         List subTo;

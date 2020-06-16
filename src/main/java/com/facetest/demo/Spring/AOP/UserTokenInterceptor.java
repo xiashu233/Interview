@@ -1,16 +1,12 @@
 package com.facetest.demo.Spring.AOP;
 
-import com.alibaba.fastjson.JSON;
-import com.facetest.demo.Java8.Apple;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,8 +29,25 @@ public class UserTokenInterceptor implements HandlerInterceptor {
      * @throws Exception
      */
     @Override
+
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 //        log.info("--- 开始拦截校验用户是否有Token ---");
+
+        HandlerMethod hd = (HandlerMethod)handler;
+        LoginCheck methodAnnotation = hd.getMethodAnnotation(LoginCheck.class);
+        if (methodAnnotation == null){
+            log.info("不需要登录，放行");
+            return true;
+        }
+
+        log.info("检测到带检测需要检测登录的注解");
+        boolean success = methodAnnotation.loginSuccess();
+
+        if (success){
+            log.info("注解表示必须要校验登录信息，信息不符合则打会重新登录页面");
+
+
+        }
 
 //        String tokenCode = request.getHeader("Token");
         

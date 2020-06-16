@@ -1,4 +1,4 @@
-package com.facetest.JVM;
+package com.facetest.demo.JVM;
 
 // JVM Java虚拟机
 // Java编写的程序为 .java 的扩展名的文件，由JDK（JRE里没有）的JavaC编译成 JVM 可以解读的 .class 字节码文件

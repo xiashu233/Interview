@@ -28,7 +28,7 @@ public class FastDFSClientUtil {
     private FastFileStorageClient storageClient;
 
     @Autowired
-    private ThumbImageConfig thumbImageConfig; //创建缩略图   ， 缩略图访问有问题，暂未解决
+    private ThumbImageConfig thumbImageConfig;
 
 
     public String uploadFile(MultipartFile file) throws IOException {

@@ -21,5 +21,7 @@ public class ThreadController {
         globalScheduledExecutorService.schedule(()->{
             System.out.println("通过Controller实现的延迟队列 --- " + Thread.currentThread().getName());
         },10, TimeUnit.SECONDS);
+
+
     }
 }

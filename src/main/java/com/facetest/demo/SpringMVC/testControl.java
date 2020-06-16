@@ -1,14 +1,13 @@
 package com.facetest.demo.SpringMVC;
 
-import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.facetest.demo.Java8.Apple;
 import com.facetest.demo.Mybatis.bean.Student;
 import com.facetest.demo.Mybatis.mapper.StudentMapper;
 import com.facetest.demo.Mybatis.service.StudentService;
-import com.facetest.demo.Redis.BloomFileter;
 
+import com.facetest.demo.Spring.AOP.LoginCheck;
 import com.facetest.demo.Spring.IOC.TeacherBean;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -19,10 +18,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
@@ -226,6 +228,46 @@ public class testControl {
 
     }
 
+    @RequestMapping("testCheckLogin")
+    @LoginCheck(loginSuccess = true)
+    public void testCheckLogin(){
+        log.info("开始测试是否携带注解");
+    }
+
+    @RequestMapping("hadUpload")
+    public void hadUpload(@RequestParam("file")MultipartFile file,HttpServletResponse response) throws IOException {
+        // 获取表单上传文件的输入流
+        InputStream inputStream = file.getInputStream();
+        // 缓冲区
+        byte[] bytes = new byte[8];
+        // 生成本地文件
+        File file1 = new File("D://ddd.txt");
+        if (file1.exists()){
+            file1.delete();
+        }
+        FileOutputStream outputStream = new FileOutputStream(file1);
+
+        // 输出到网页
+        ServletOutputStream outputStream1 = response.getOutputStream();
+        response.reset();
+        // 设置文件头 及转码
+        response.setHeader("Content-Disposition",
+                "attchement;filename=" + new String(file.getOriginalFilename().getBytes("gb2312"), "ISO8859-1"));
+        response.setContentType("application/msexcel");
+        // 写入输出流
+        while (inputStream.read(bytes) != -1){
+            outputStream1.write(bytes);
+        }
+
+
+        inputStream.close();
+        outputStream.close();
+        // 刷出缓冲区
+        // outputStream1.flush();
+        outputStream1.close();
+
+
+    }
 
 
 }

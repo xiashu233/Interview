@@ -3,7 +3,7 @@ package com.facetest.demo.多线程;
 /**
  * 线程死锁 A占有a资源 B占有b资源 A占有资源不释放的情况下去请求没有被释放的b资源，两者都相持不下故造成死锁
  */
-public  class  ThreadDie {
+public class ThreadDie {
 
     private static Object resource1 = new Object();
     private static Object resource2 = new Object();

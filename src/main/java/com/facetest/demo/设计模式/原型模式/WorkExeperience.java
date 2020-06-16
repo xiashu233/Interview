@@ -2,6 +2,10 @@ package com.facetest.demo.设计模式.原型模式;
 
 import java.io.Serializable;
 
+/**
+ * 也叫复制模式 主要是使用到了深层 clone
+ * 深层 clone：不光本类实现了 Serializable,Cloneable 接口，本类中的引用类型的属性也需要实现这两个接口，
+ */
 public class WorkExeperience implements Serializable,Cloneable {
     private String workDate;
     private String company;

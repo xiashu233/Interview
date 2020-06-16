@@ -8,7 +8,7 @@ import com.facetest.demo.Mybatis.mapper.StudentMapper;
 import com.facetest.demo.Mybatis.mapper.TeacherMapper;
 import com.facetest.demo.Mybatis.service.StudentService;
 //import com.github.pagehelper.PageHelper;
-import com.facetest.demo.Response.ResponseResultVo;
+import com.facetest.demo.Response.R;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,7 +94,7 @@ public class MybatisController {
      */
     @RequestMapping("testPage")
     @ApiOperation(value = "post请求调用示例", notes = "invokePost说明", httpMethod = "POST")
-    public ResponseResultVo testPage(int pageNum, int pageSize){
+    public R testPage(int pageNum, int pageSize){
         IPage<Student> studentQueryPage = new Page<>(pageNum,pageSize);
         studentMapper.selectPage(studentQueryPage, null);
         List<Student> students = studentQueryPage.getRecords();
@@ -102,7 +102,7 @@ public class MybatisController {
         long pages = studentQueryPage.getPages();
         PageBean<List<Student>> pageBean = new PageBean<>(pages,students,pageNum,pageSize,studentQueryPage.getTotal(),pageNum>1,pageNum<pages);
 
-        return ResponseResultVo.success(pageBean);
+        return R.success(pageBean);
 
     }
 

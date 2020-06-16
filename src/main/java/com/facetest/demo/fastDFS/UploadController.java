@@ -1,4 +1,4 @@
-package com.facetest.FastDFS;
+package com.facetest.demo.fastDFS;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,14 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.facetest.demo.utils.FastDFSClientUtil;
+import io.swagger.annotations.Api;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @CrossOrigin
 @RestController
+@Api(tags = "FastDFS常见方法")
 @RequestMapping("/FastDFS")
 public class UploadController {
  
@@ -23,7 +24,7 @@ public class UploadController {
 	private FastDFSClientUtil dfsClient;
 
 	@RequestMapping("upload")
-	public String fdfsUpload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+	public String upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
 		String fileUrl = "";
 		try {
 			fileUrl = dfsClient.uploadFile(file);
