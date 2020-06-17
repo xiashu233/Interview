@@ -19,7 +19,7 @@ public class ZipUtil {
      * @param srcFiles
      * @param zipFileName
      */
-    public static void downloadZipFiles(HttpServletResponse response, List<String> srcFiles, String zipFileName) {
+    public static final void downloadZipFiles(HttpServletResponse response, List<String> srcFiles, String zipFileName) {
         try {
             // 重点突出
             response.reset();
@@ -46,7 +46,7 @@ public class ZipUtil {
      * @param filePaths 需要压缩的文件路径集合
      * @throws IOException
      */
-    private static void zipFile(List<String> filePaths, ZipOutputStream zos) {
+    private static final void zipFile(List<String> filePaths, ZipOutputStream zos) {
         //设置读取数据缓存大小
         byte[] buffer = new byte[4096];
         try {

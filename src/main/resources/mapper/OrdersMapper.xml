@@ -15,7 +15,7 @@
             student.stu_id = #{studentId}
     </select>
 
-
+    <!-- XML中单个Namespace不允许出现相同id 的语句 虽然在接口或者XML中不会直接报错 但是会出现很大的问题 从上往下执行 -->
     <select id="selects" resultType="com.facetest.demo.Mybatis.bean.Orders" parameterType="Integer">
         select * from orders where order_id = #{orderId}
     </select>

@@ -239,7 +239,7 @@ public class testControl {
         // 获取表单上传文件的输入流
         InputStream inputStream = file.getInputStream();
         // 缓冲区
-        byte[] bytes = new byte[8];
+        byte[] bytes = new byte[1024];
         // 生成本地文件
         File file1 = new File("D://ddd.txt");
         if (file1.exists()){
@@ -254,11 +254,14 @@ public class testControl {
         response.setHeader("Content-Disposition",
                 "attchement;filename=" + new String(file.getOriginalFilename().getBytes("gb2312"), "ISO8859-1"));
         response.setContentType("application/msexcel");
+        int len = -1;
         // 写入输出流
-        while (inputStream.read(bytes) != -1){
-            outputStream1.write(bytes);
+        while ((len = inputStream.read(bytes)) != -1){
+            outputStream1.write(bytes,0,len);
         }
 
+        // Arrays.copyOf();
+        new ArrayList();
 
         inputStream.close();
         outputStream.close();

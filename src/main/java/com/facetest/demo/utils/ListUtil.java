@@ -12,7 +12,7 @@ public class ListUtil implements Serializable {
      * @param pageSize 分页大小
      * @return 分页后的集合
      */
-    public static List subList(List list, int pageSize){
+    public static final List subList(List list, int pageSize){
         int pageCount = list.size();
         List subList = new ArrayList();
         List subTo;

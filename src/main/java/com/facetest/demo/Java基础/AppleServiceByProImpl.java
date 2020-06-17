@@ -24,4 +24,10 @@ public class AppleServiceByProImpl implements AppleServiceByPro {
     public Apple change(Apple data) {
         return null;
     }
+
+    // 接口中不被default修饰的方法子类必须强制重写
+    @Override
+    public void test() {
+
+    }
 }
