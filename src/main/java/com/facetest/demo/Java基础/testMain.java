@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Slf4j
 public  class testMain {
@@ -59,7 +60,78 @@ public  class testMain {
 //
 //        System.out.println(subList(list,pageSize));
 
+//        List list = new ArrayList();
+        // ArrayList arrayList = (ArrayList) Collections.unmodifiableCollection(list);
+        // arrayList.add("123");
 
+//        List<Integer> integerList = new ArrayList<>();
+
+//        integerList.add(1);
+//        integerList.add(2);
+//        Iterator<Integer> iterator = integerList.iterator();
+//        while (iterator.hasNext()){
+//            Integer next = iterator.next();
+//            iterator.remove();
+//        }
+
+
+//        iterator.remove();
+
+//        System.out.println(integerList.size() + "---" + iterator);
+//
+        LinkedList linkedList = new LinkedList();
+        
+//
+//        ListIterator listIterator = linkedList.listIterator();
+//
+//        Iterator iterator1 = linkedList.iterator();
+        // HashMap
+
+
+
+        // iterator.next()
+
+        /**
+         *
+         * Object src,  源数组
+         * int  srcPos, 源数组开始复制的下标
+         * Object dest, 对象数组
+         * int destPos, 对象数组开始被复制的下标
+         * int length   复制的位数
+         * 当源数组 = 对象数组的时候就是修改
+         */
+         // System.arraycopy();
+
+
+        // 构建一个线程安全的ArrayList
+//        List<Student> students = Collections.synchronizedList(new ArrayList<Student>());
+//        System.out.println(students.getClass());
+
+        List<String> list = new ArrayList<String>() {{
+            add("2");
+            add("3");
+            add("3");
+            add("3");
+            add("4");
+        }};
+//        for (int i = 0; i < list.size(); i++) {
+//            if (list.get(i).equals("3")) {
+//                list.remove(i);
+//                i--;
+//            }
+//        }
+
+        Iterator<String> iterator = list.iterator();
+        while (iterator.hasNext()){
+            String next = iterator.next();
+            if ("3".equals(next)){
+                iterator.remove();
+            }
+        }
+
+        System.out.println(list);
+        // 线程安全的 ArrayList 类
+        CopyOnWriteArrayList copyOnWriteArrayList = new CopyOnWriteArrayList();
 
     }
 
