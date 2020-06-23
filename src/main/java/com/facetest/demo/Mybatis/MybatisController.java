@@ -3,9 +3,11 @@ package com.facetest.demo.Mybatis;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.facetest.demo.Mybatis.bean.*;
+import com.facetest.demo.Mybatis.mapper.CardMapper;
 import com.facetest.demo.Mybatis.mapper.OrdersMapper;
 import com.facetest.demo.Mybatis.mapper.StudentMapper;
 import com.facetest.demo.Mybatis.mapper.TeacherMapper;
+import com.facetest.demo.Mybatis.service.CardService;
 import com.facetest.demo.Mybatis.service.StudentService;
 //import com.github.pagehelper.PageHelper;
 import com.facetest.demo.Response.R;
@@ -30,9 +32,13 @@ public class MybatisController {
     @Autowired
     StudentService studentService;
     @Autowired
+    CardService cardService;
+    @Autowired
     TeacherMapper teacherMapper;
     @Autowired
     OrdersMapper ordersMapper;
+    @Autowired
+    CardMapper cardMapper;
 
 //    @Autowired
 //    Person person;
@@ -104,6 +110,16 @@ public class MybatisController {
 
         return R.success(pageBean);
 
+    }
+
+    @RequestMapping("insertDataOfCard")
+    public void insertDataOfCard(){
+        List<Card> cards = new ArrayList<>();
+        for (int i = 0; i < 10000000; i++) {
+            cards.add(new Card(i + 0L,100000000L + i));
+        }
+        cardService.saveBatch(cards);
+        System.out.println("执行完成");
     }
 
 }

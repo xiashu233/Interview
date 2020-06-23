@@ -23,6 +23,22 @@ package com.facetest.demo.JVM;
 // 虽然Java虚拟机将方法区描述为堆的一个逻辑部分，但是他却又一个别名叫做Non-Heap（非堆），目的是与内存堆区分开。
 public class JVMNote {
     public static void main(String[] args) {
+        JVMNote jvmNote = new JVMNote();
+        jvmNote.func1();
+    }
 
+    public void func1(){
+        int func1a = 1;
+        int func2a = 2;
+
+        int fun3a = func1a + func2a;
+
+        System.out.println("func1");
+
+        func2();
+    }
+
+    public void func2(){
+        System.out.println("func2");
     }
 }

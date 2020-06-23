@@ -50,10 +50,17 @@ public class Test {
         Student s2 = new Student("小李",24);
         Student s3 = new Student("小李",8);
 
+        // HashMap
+
         List<Student> students = new ArrayList<>();
         students.add(s1);
         students.add(s2);
         students.add(s3);
+
+        // LinkedList<int> ls = new LinkedList<int>();
+
+       // new HashSet<>().
+
 
         // Collections.sort(students, Comparator.comparing((s,s2) -> s1.getAge()-s2.get));
 

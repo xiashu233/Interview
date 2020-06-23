@@ -54,10 +54,19 @@ public class testControl {
 
     @RequestMapping("testUploadFile")
     public String testUploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+
+
+        String s = "123";
+        s = "111";
+        s = s + "1";
+
+
         System.out.println(file.getName());
         return "";
 
+
     }
+
 
     @PostMapping("/ss/{id}")
     public String ss(@PathVariable("id")String id){
