@@ -1,6 +1,8 @@
 package com.facetest.demo.多线程;
 
 import java.sql.Connection;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AtomicIntegerDemo {
@@ -27,6 +29,9 @@ public class AtomicIntegerDemo {
         }
 
         Thread.sleep(500);
+
+
+
 
 
         System.out.println("线程安全的int类型：" + count + "---非线程安全的int类型：" + countInt);
