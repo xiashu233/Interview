@@ -112,7 +112,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.61</version>
+            <version>1.2.83</version>
         </dependency>
         <!--七牛云上传需要的依赖-->
         <dependency>
